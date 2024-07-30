@@ -1,0 +1,22 @@
+.loginButton {
+  background-color: #5865F2;
+  border-radius: 10px;
+  padding: 10px 14px;
+  text-transform: uppercase;
+  transition: background-color 300ms ease-in-out;
+}
+
+.loginButton:hover {
+  background-color: #6780FF;
+}
+
+.loginButton:active {
+  background-color: #6C85FF;
+}
+
+.linksContainer {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 61px;
+    gap: 24px;
+}

@@ -1,0 +1,32 @@
+.container {
+  margin: 0 auto;
+  width: 960px;
+  overflow-x: scroll;
+  margin-top: 16px;
+}
+
+.table {
+  border-collapse: collapse;
+}
+
+.table td,
+.table th {
+  padding: 0.5rem 0.67rem;
+  box-sizing: border-box;
+  min-width: 10rem;
+}
+
+.table td {
+  box-sizing: border-box;
+  color: var(--color-6);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.table thead > tr {
+  border-bottom: 1px solid var(--color-6);
+}
+
+.table tr:not(:last-child) {
+  border-bottom: 1px solid var(--color-6);
+}
