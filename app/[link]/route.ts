@@ -15,7 +15,7 @@ export async function GET(
 
   // получение информации о ссылке из бд
   const link = await prisma.link.findUnique({
-    where: { linkName: params.link },
+    where: { linkName: params.link.toLowerCase() },
   })
   // если ссылка не существует то перекидываем на страницу ошибки
   if (!link) return NextResponse.redirect(new URL('/notfound', request.url))

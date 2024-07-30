@@ -1,6 +1,9 @@
 'use client'
 
-import deleteLink from "@/actions/deleteLink"
+import deleteLink from '@/actions/deleteLink'
+import editLink from '@/actions/editLink'
+import { useFormState } from 'react-dom'
+import styles from '../styles/link-editor.module.css'
 
 interface Link {
   id: string
@@ -9,26 +12,46 @@ interface Link {
   authorId: string
 }
 
-export default function LinkEditor({ link, baseURL }: { link: Link; baseURL: string }) {
+export default function LinkEditor({
+  link,
+  baseURL,
+}: {
+  link: Link
+  baseURL: string
+}) {
   function copyLink() {
     navigator.clipboard.writeText(new URL(link.linkName, baseURL).toString())
   }
+  const [state, formAction] = useFormState(editLink, { message: '' })
   return (
-    <>
-      <form action="">
+    <div className={styles.container}>
+      <form className={styles.form} action={formAction}>
         <div>
           <label htmlFor="">https://fxnk.ru/</label>
-          <input type="text" defaultValue={link.linkName} />
+          <input
+            type="text"
+            id="linkName"
+            name="linkName"
+            defaultValue={link.linkName}
+          />
+          <button onClick={() => copyLink()} className={styles.copyButton}>
+            <span className="material-symbols-outlined">content_copy</span>
+          </button>
+          <button
+            onClick={async () => await deleteLink(link.id)}
+            className={styles.delButton}
+          >
+            <span className="material-symbols-outlined">delete_forever</span>
+          </button>
         </div>
-        <input type="text" defaultValue={link.url} />
+        <div>
+          <input type="url" id="url" name="url" defaultValue={link.url} />
+        </div>
         <div>
           <button type="submit">Сохранить</button>
         </div>
+        {state.message && <p>{state.message}</p>}
       </form>
-      <button onClick={() => copyLink()}>Скопировать ссылку</button>
-      <button onClick={async () => await deleteLink(link.id)}>
-        Удалить ссылку
-      </button>
-    </>
+    </div>
   )
 }

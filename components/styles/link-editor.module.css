@@ -1,0 +1,48 @@
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* form */
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form div:not(:last-child) {
+  display: flex;
+  align-items: center;
+}
+
+.form label {
+  margin-right: 8px;
+}
+
+.form input {
+  flex: 1 1 auto;
+}
+
+.form div:nth-child(3) button {
+  width: 100%;
+  background-color: #258046;
+}
+
+.form button:hover {
+  opacity: 0.8;
+}
+/* copy and delete buttons */
+.copyButton {
+    margin: 0 4px;
+}
+.delButton span{
+    color: #e04646;
+}
+
+.copyButton, .delButton {
+  background-color: var(--color-5);
+  height: 57px;
+  width: 57px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
