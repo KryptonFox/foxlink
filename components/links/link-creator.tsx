@@ -1,21 +1,31 @@
 'use client'
+
 import createLink from '@/actions/createLink'
 import { useFormState } from 'react-dom'
 import styles from '../styles/link-creator.module.css'
-import { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function LinkCreator({ auth }: { auth: boolean }) {
-  const [state, formAction] = useFormState(createLink, { message: '' })
+  const [state, formAction] = useFormState(createLink, { message: '' });
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (state.url) {
-      navigator.clipboard.writeText(state.url)
+    if (state.url || state.message) {
+      setLoading(false);
     }
-  }, [state.url])
+  }, [state.url, state.message]);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setLoading(true);
+
+    const formData = new FormData(event.currentTarget);
+    formAction(formData)
+  };
 
   return (
     <div className={styles.container}>
-      <form className={styles.linkCreatorForm} action={formAction}>
+      <form className={styles.linkCreatorForm} onSubmit={handleSubmit}>
         <div className={styles.inputContainer}>
           {!auth && (
             <div className={styles.tooltip}>
@@ -49,12 +59,15 @@ export default function LinkCreator({ auth }: { auth: boolean }) {
           <button type="submit" disabled={!auth}>
             Сократить!
           </button>
-          {state.message && (
-            <p className={`${styles.errorMessage}`}>{state.message}</p>
+          {loading && (
+            <p className={styles.loadingMessage}>Подождите секунду...</p>
+          )}
+          {!loading && state.message && (
+            <p className={styles.errorMessage}>{state.message}</p>
           )}
         </div>
       </form>
-      {state.url && <a href={state.url}>{state.url}</a>}
+      {!loading && state.url && <a href={state.url}>{state.url}</a>}
     </div>
-  )
+  );
 }
