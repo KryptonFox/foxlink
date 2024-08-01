@@ -1,8 +1,29 @@
 'use client'
 import createLink from '@/actions/createLink'
-import { useFormState } from 'react-dom'
+import { useFormState, useFormStatus } from 'react-dom'
 import styles from '../styles/link-creator.module.css'
 import { useEffect } from 'react'
+
+function SubmitButton({
+  auth,
+  state,
+}: {
+  auth: boolean
+  state: { message?: string; url?: string }
+}) {
+  const { pending } = useFormStatus()
+  return (
+    <>
+      <button type="submit" disabled={!auth || pending}>
+        Сократить!
+      </button>
+      {(pending && <p className={styles.pendingMessage}>Загрузка...</p>) ||
+        (state.message && (
+          <p className={`${styles.errorMessage}`}>{state.message}</p>
+        ))}
+    </>
+  )
+}
 
 export default function LinkCreator({ auth }: { auth: boolean }) {
   const [state, formAction] = useFormState(createLink, { message: '' })
@@ -46,12 +67,7 @@ export default function LinkCreator({ auth }: { auth: boolean }) {
           </div>
         </div>
         <div className={styles.buttonContainer}>
-          <button type="submit" disabled={!auth}>
-            Сократить!
-          </button>
-          {state.message && (
-            <p className={`${styles.errorMessage}`}>{state.message}</p>
-          )}
+          <SubmitButton auth={auth} state={state} />
         </div>
       </form>
       {state.url && <a href={state.url}>{state.url}</a>}

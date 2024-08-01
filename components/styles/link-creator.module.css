@@ -60,6 +60,11 @@
   color: var(--color-6);
 }
 
+.pendingMessage {
+    font-size: 0.75rem;
+    text-align: center;
+}
+
 .errorMessage {
     color: crimson;
     font-size: 0.75rem;
