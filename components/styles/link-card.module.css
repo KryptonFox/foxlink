@@ -3,6 +3,7 @@
     border-radius: 10px;
     width: 300px;
     padding: 16px;
+    height: 98px;
     box-sizing: border-box;
     background-color: var(--color-2);
     flex: 1 1 300px;
@@ -14,8 +15,9 @@
 }
 
 .linkCard p:nth-child(2) {
-    color: var(--color-6);
-    overflow: hidden;
     text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    color: var(--color-6);
     font-size: 0.834rem;
 }
