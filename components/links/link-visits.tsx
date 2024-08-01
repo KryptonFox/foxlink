@@ -10,12 +10,12 @@ export default async function LinkVisits({ id }: { id: string }) {
     <div className={styles.container}>
       <table className={styles.table}>
         <thead>
-          <tr>
-            <th>Дата</th>
-            <th>IP</th>
-            <th>Страна</th>
-            <th>Город</th>
-          </tr>
+        <tr>
+          <th>Дата</th>
+          <th>Страна</th>
+          <th>Регион</th>
+          <th>Город</th>
+        </tr>
         </thead>
         <tbody>
           {visits?.visits.map((visit) => {
@@ -25,8 +25,8 @@ export default async function LinkVisits({ id }: { id: string }) {
             return (
               <tr key={visit.id}>
                 <td>{date}</td>
-                <td>{visit.ip}</td>
                 <td>{visit.country || 'Неизвестно'}</td>
+                <td>{visit.region || 'Неизвестно'}</td>
                 <td>{visit.city || 'Неизвестно'}</td>
               </tr>
             )

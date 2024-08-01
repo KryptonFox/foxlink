@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+ import type { Metadata } from 'next'
 import './globals.css'
 import 'dotenv/config'
 import { robotoSlab } from './fonts'

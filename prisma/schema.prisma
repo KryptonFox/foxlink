@@ -35,6 +35,7 @@ model Visit {
   ip        String
   country   String?
   city      String?
+  region    String?
   timestamp DateTime @default(now())
   linkId    String   @db.ObjectId
   link      Link     @relation(fields: [linkId], references: [id], onDelete: Cascade)

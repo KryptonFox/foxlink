@@ -6,6 +6,7 @@ interface VisitData {
   city?: string
   country?: string
   link: { connect: { id: string } }
+  region?: string
 }
 
 export async function GET(
@@ -29,16 +30,18 @@ export async function GET(
     visitData.ip = request.ip
     visitData.city = request.geo?.city!
     visitData.country = request.geo?.country!
+    visitData.region = request.geo?.region!
   } else {
     // если хостинг не Vercel то получаем данные о геолокации через ip-api.com
     const res = await fetch(
-      `http://ip-api.com/json/${visitData.ip}?fields=status,country,city,query`,
+      `http://ip-api.com/json/${visitData.ip}?fields=status,country,city,regionName,query`,
     )
     const json = await res.json()
     if (json.status === 'success') {
       visitData.ip = json.query
       visitData.city = json.city
       visitData.country = json.country
+      visitData.region = json.regionName
     }
   }
   // запись данных о посещении в бд
