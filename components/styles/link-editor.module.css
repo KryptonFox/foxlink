@@ -7,6 +7,7 @@
 .form {
   display: flex;
   flex-direction: column;
+  margin: 16px 0;
 }
 
 .form div:not(:last-child) {
@@ -22,8 +23,9 @@
   flex: 1 1 auto;
 }
 
-.form div:nth-child(3) button {
+.form button[type='submit'] {
   width: 100%;
+  margin-top: 12px;
   background-color: #258046;
 }
 

@@ -34,11 +34,11 @@ export default function LinkEditor({
             name="linkName"
             defaultValue={link.linkName}
           />
-          <button onClick={() => copyLink()} className={styles.copyButton}>
+          <button onClick={(e) => {e.preventDefault(); copyLink()}} className={styles.copyButton}>
             <span className="material-symbols-outlined">content_copy</span>
           </button>
           <button
-            onClick={async () => await deleteLink(link.id)}
+            onClick={async (e) => {e.preventDefault(); await deleteLink(link.id)}}
             className={styles.delButton}
           >
             <span className="material-symbols-outlined">delete_forever</span>
