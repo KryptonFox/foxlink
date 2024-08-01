@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { PrismaClient } from '@prisma/client'
 import { SignJWT } from 'jose'
 import prisma from '@/prisma/prisma'
 

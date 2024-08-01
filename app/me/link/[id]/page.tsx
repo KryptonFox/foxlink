@@ -1,4 +1,3 @@
-import { PrismaClient } from '@prisma/client'
 import { Suspense } from 'react'
 import styles from './page.module.css'
 import Loading from './loading'

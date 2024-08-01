@@ -1,6 +1,5 @@
 'use server'
 
-import { PrismaClient } from '@prisma/client'
 import getUserId from './getUserId'
 import prisma from '@/prisma/prisma'
 
