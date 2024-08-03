@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import 'dotenv/config'
 import { robotoSlab } from './fonts'
 import styles from './page.module.css'
 import Navbar from '@/components/navbar/navbar'
