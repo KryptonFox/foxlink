@@ -1,7 +1,14 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { MiddlewareConfig, NextRequest, NextResponse } from 'next/server'
 import { jwtVerify } from 'jose'
 
+const authUserOnlyURLs = /\/me(\/.*|)/gm
+
+export const config: MiddlewareConfig = {
+  matcher: ['/me/:path*', '/']
+}
+
 export async function middleware(request: NextRequest) {
+  console.log('midl')
   //  проверка токена
   if (request.cookies.has('token')) {
     try {
@@ -16,6 +23,10 @@ export async function middleware(request: NextRequest) {
       response.cookies.delete('token')
       return response
     }
-  }
+  } else {
+    // нет токена
+    if (authUserOnlyURLs.test(request.nextUrl.pathname))
+      return NextResponse.redirect(process.env.BASE_URL!)
+    }
   return NextResponse.next()
 }
