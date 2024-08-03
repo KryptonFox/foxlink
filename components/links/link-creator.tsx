@@ -61,7 +61,7 @@ export default function LinkCreator({ auth }: { auth: boolean }) {
               type="text"
               id="linkName"
               name="linkName"
-              placeholder="name"
+              placeholder="name (опционально)"
               disabled={!auth}
             />
           </div>
@@ -70,7 +70,12 @@ export default function LinkCreator({ auth }: { auth: boolean }) {
           <SubmitButton auth={auth} state={state} />
         </div>
       </form>
-      {state.url && <a href={state.url}>{state.url}</a>}
+      {state.url && (
+        <div className={styles.linkPreview}>
+          <p>Ссылка успешно создана и скопирована в буфер обмена</p>
+          <a href={state.url}>{state.url}</a>
+        </div>
+      )}
     </div>
   )
 }
