@@ -8,7 +8,6 @@ export const config: MiddlewareConfig = {
 }
 
 export async function middleware(request: NextRequest) {
-  console.log('midl')
   //  проверка токена
   if (request.cookies.has('token')) {
     try {
