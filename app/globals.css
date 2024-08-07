@@ -13,6 +13,12 @@
   --color-6: #4c4f67;
 }
 
+@media (max-width: 768px) {
+  * {
+    font-size: 16px;
+  }
+}
+
 body {
   background-color: var(--color-1);
 }

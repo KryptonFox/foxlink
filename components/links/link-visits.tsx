@@ -12,7 +12,7 @@ export default async function LinkVisits({ id }: { id: string }) {
         <thead>
           <tr>
             <th>Дата</th>
-            <th>IP</th>
+            {/* <th>IP</th> */}
             <th>Страна</th>
             <th>Город</th>
           </tr>
@@ -25,7 +25,7 @@ export default async function LinkVisits({ id }: { id: string }) {
             return (
               <tr key={visit.id}>
                 <td>{date}</td>
-                <td>{visit.ip}</td>
+                {/* <td>{visit.ip}</td> */}
                 <td>{visit.country || 'Неизвестно'}</td>
                 <td>{visit.city || 'Неизвестно'}</td>
               </tr>
