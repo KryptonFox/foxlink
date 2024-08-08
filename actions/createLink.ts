@@ -5,7 +5,7 @@ import prisma from '@/prisma/prisma'
 
 const linkNameBlacklist = ['home', 'lol', 'me', 'notfound']
 const linkNameMinLength = 2
-const linkNameRegExp = /^[0-9a-zA-Z?%]+$/gm
+const linkNameRegExp = /^[0-9a-zA-Z._\-]+$/gm
 const linkNameGeneratorCharset = '0123456789qwertyuiopasdfghjklzxcvbnm?%'
 const linkNameGeneratorStringLength = 3
 const rand = () =>
@@ -30,7 +30,7 @@ export default async function createLink(
     if (linkNameBlacklist.includes(linkName))
       return { message: 'Имя ссылки запрещено' }
     if (!linkNameRegExp.test(linkName))
-      return { message: 'Разрешены только цифры, латиница, ? и %' }
+      return { message: 'Разрешены только цифры, латиница, -, _ и .' }
     if (linkName.length < linkNameMinLength)
       return { message: 'Короткое имя ссылки' }
     if (await prisma.link.findUnique({ where: { linkName: linkName } }))
