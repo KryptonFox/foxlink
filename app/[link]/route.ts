@@ -12,15 +12,16 @@ export async function GET(
   request: NextRequest,
   { params }: { params: { link: string } },
 ): Promise<NextResponse<unknown>> {
+  return NextResponse.redirect('https://gachi.gay/o4rp5')
 
-  // получение информации о ссылке из бд
-  const link = await prisma.link.findUnique({
-    where: { linkName: params.link.toLowerCase() },
-  })
-  // если ссылка не существует то перекидываем на страницу ошибки
-  if (!link) return NextResponse.redirect(new URL('/notfound', request.url))
+  // // получение информации о ссылке из бд
+  // const link = await prisma.link.findUnique({
+  //   where: { linkName: params.link.toLowerCase() },
+  // })
+  // // если ссылка не существует то перекидываем на страницу ошибки
+  // if (!link) return NextResponse.redirect(new URL('/notfound', request.url))
     
-  return NextResponse.redirect(link.url)
+  // return NextResponse.redirect(link.url)
   // // получение информации о том кто перешёл по ссылке
   // let visitData: VisitData = {
   //   ip: request.headers.get('X-Forwarded-For')!.toString(),
