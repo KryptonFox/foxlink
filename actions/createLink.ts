@@ -17,7 +17,7 @@ export default async function createLink(
 ): Promise<{ message?: string; url?: string }> {
   let url = formData.get('url')?.toString().trim()
   let linkName = formData.get('linkName')?.toString().trim()
-  // url validaton
+  // url validation
   if (!url) return { message: 'Введите URL' }
   try {
     url = new URL(url).toString()

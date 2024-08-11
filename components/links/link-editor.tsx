@@ -4,6 +4,7 @@ import deleteLink from '@/actions/deleteLink'
 import editLink from '@/actions/editLink'
 import { useFormState } from 'react-dom'
 import styles from '../styles/link-editor.module.css'
+import { useEffect, useState } from 'react'
 
 interface Link {
   id: string
@@ -13,32 +14,50 @@ interface Link {
 }
 
 export default function LinkEditor({
-  link,
+  linkProp,
   baseURL,
 }: {
-  link: Link
+  linkProp: Link
   baseURL: string
 }) {
-  function copyLink() {
+  const copyLink = () =>
     navigator.clipboard.writeText(new URL(link.linkName, baseURL).toString())
-  }
-  const [state, formAction] = useFormState(editLink, { message: '' })
+
+  const [link, setLink] = useState(linkProp)
+  const editLinkWithLink = editLink.bind(null, link)
+  const [state, formAction] = useFormState(editLinkWithLink, { message: '' })
+
+  useEffect(() => {
+    if (state.link) {
+      setLink(state.link)
+    }
+  }, [state])
+
   return (
     <div className={styles.container}>
       <form className={styles.form} action={formAction}>
         <div>
-          <label htmlFor="">https://fxnk.ru/</label>
+          <label>https://fxnk.ru/</label>
           <input
             type="text"
             id="linkName"
             name="linkName"
             defaultValue={link.linkName}
           />
-          <button onClick={(e) => {e.preventDefault(); copyLink()}} className={styles.copyButton}>
+          <button
+            onClick={async (e) => {
+              e.preventDefault()
+              await copyLink()
+            }}
+            className={styles.copyButton}
+          >
             <span className="material-symbols-outlined">content_copy</span>
           </button>
           <button
-            onClick={async (e) => {e.preventDefault(); await deleteLink(link.id)}}
+            onClick={async (e) => {
+              e.preventDefault()
+              await deleteLink(link.id)
+            }}
             className={styles.delButton}
           >
             <span className="material-symbols-outlined">delete_forever</span>

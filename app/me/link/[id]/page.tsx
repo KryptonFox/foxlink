@@ -22,7 +22,7 @@ export default async function LinkPage({ params }: { params: { id: string } }) {
     <main>
       <h1 className={styles.header}>Редактор ссылки</h1>
       <Suspense fallback={<Loading />}>
-        <LinkEditor link={linkInfo!} baseURL={process.env.BASE_URL!} />
+        <LinkEditor linkProp={linkInfo} baseURL={process.env.BASE_URL!} />
       </Suspense>
       <h1 className={styles.header}>История посещений</h1>
       <Suspense fallback={<Loading />}>
