@@ -1,5 +1,5 @@
 import LinkCard from './link-card'
-import styles from '../styles/components.module.css'
+import styles from '../styles/link-card.module.css'
 import getUserId from '@/actions/getUserId'
 import prisma from '@/prisma/prisma'
 

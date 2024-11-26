@@ -20,3 +20,11 @@
     color: var(--color-6);
     font-size: 0.834rem;
 }
+
+.linksContainer {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 61px;
+    gap: 24px;
+}
+

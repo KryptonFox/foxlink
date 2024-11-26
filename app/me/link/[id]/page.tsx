@@ -7,15 +7,20 @@ import prisma from '@/prisma/prisma'
 import getUserId from '@/actions/getUserId'
 import { redirect } from 'next/navigation'
 
-export default async function LinkPage({ params }: { params: { id: string } }) {
+interface Props {
+  params: {
+    id: string
+  }
+}
+
+export default async function LinkPage({ params }: Props) {
   const linkInfo = await prisma.link.findUnique({
     where: { id: params.id },
   })
   // если ссылка не найдена то редирект на главную
-  if (!linkInfo)
-    redirect(new URL('/', process.env.BASE_URL!).toString())
+  if (!linkInfo) redirect(new URL('/', process.env.BASE_URL!).toString())
   // если ссылка принадлежит другому пользователю, то редирект на главную
-  if (linkInfo!.authorId !== await getUserId())
+  if (linkInfo!.authorId !== (await getUserId()))
     redirect(new URL('/', process.env.BASE_URL!).toString())
 
   return (

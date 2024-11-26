@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from 'next'
+import Navbar from '@/components/navbar/navbar'
+import Footer from '@/components/layout/footer'
+import styles from './page.module.css'
 import './globals.css'
 import { robotoSlab } from './fonts'
-import styles from './page.module.css'
-import Navbar from '@/components/navbar/navbar'
-import Footer from '@/components/footer/footer'
+import { type ReactNode } from 'react'
 
 export const viewport: Viewport = {
   themeColor: '#0c0d11',
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: ReactNode
 }>) {
   return (
     <html lang="ru">
@@ -42,7 +43,7 @@ export default function RootLayout({
         <div className={styles.container}>
           <Navbar />
           {children}
-          <Footer/>
+          <Footer />
         </div>
       </body>
     </html>

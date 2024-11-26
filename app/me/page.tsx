@@ -7,8 +7,8 @@ export default async function page() {
   return (
     <main>
       <h1 className={styles.header}>Ваши ссылки</h1>
-      <Suspense fallback={<Loading/>}>
-        <LinkCardList/>
+      <Suspense fallback={<Loading />}>
+        <LinkCardList />
       </Suspense>
     </main>
   )

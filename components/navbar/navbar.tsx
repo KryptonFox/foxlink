@@ -1,8 +1,8 @@
 import Link from 'next/link'
-import styles from '../styles/navbar.module.css'
-import { cookies } from 'next/headers'
-import LoginButton from '@/components/navbar/login-button'
-import Profile from './profile'
+import styles from './navbar.module.css'
+import { Suspense } from 'react'
+import Avatar from '@/components/navbar/avatar'
+import LoadingCircle from '@/components/layout/loading-circle'
 
 export default function Navbar() {
   return (
@@ -12,7 +12,9 @@ export default function Navbar() {
           <h1>FoxLink</h1>
         </Link>
         <div className={styles.line}></div>
-        {cookies().has('token') ? <Profile /> : <LoginButton />}
+        <Suspense fallback={<LoadingCircle />}>
+          <Avatar />
+        </Suspense>
       </div>
       <Link href="/">
         <p className={styles.subh}>Сокращатель ссылок</p>
